@@ -29,51 +29,51 @@ __Procedure__:
 7) Low-pass filter to recover message
 
 __Program__:
-import numpy as np
-import matplotlib.pyplot as plt
-fs = 10000 
-t = np.arange(0, 0.01, 1/fs)
+   import numpy as np
+   import matplotlib.pyplot as plt
+   fs = 10000 
+   t = np.arange(0, 0.01, 1/fs)
 
-Am = 1       
-Ac = 5      
-fm = 100     
-fc = 1000    
-mod_index = 0.7  
+   Am = 1       
+   Ac = 5      
+   fm = 100     
+   fc = 1000    
+   mod_index = 0.7  
 
-message = Am * np.sin(2 * np.pi * fm * t)
-carrier = Ac * np.sin(2 * np.pi * fc * t)
-am_signal = Ac * (1 + mod_index * np.sin(2 * np.pi * fm * t)) * np.sin(2 * np.pi * fc * t)
-rectified = np.abs(am_signal)
-N = 50
-demodulated = np.convolve(rectified, np.ones(N)/N, mode='same')
-plt.figure(figsize=(12,10))
+   message = Am * np.sin(2 * np.pi * fm * t)
+   carrier = Ac * np.sin(2 * np.pi * fc * t)
+   am_signal = Ac * (1 + mod_index * np.sin(2 * np.pi * fm * t)) * np.sin(2 * np.pi * fc * t)
+   rectified = np.abs(am_signal)
+   N = 50
+   demodulated = np.convolve(rectified, np.ones(N)/N, mode='same')
+   plt.figure(figsize=(12,10))
 
-plt.subplot(4,1,1)
-plt.plot(t, message)
-plt.title("Message Signal (Modulating Signal)")
-plt.xlabel("Time")
-plt.ylabel("Amplitude")
+   plt.subplot(4,1,1)
+   plt.plot(t, message)
+   plt.title("Message Signal (Modulating Signal)")
+   plt.xlabel("Time")
+   plt.ylabel("Amplitude")
 
-plt.subplot(4,1,2)
-plt.plot(t, carrier)
-plt.title("Carrier Signal")
-plt.xlabel("Time")
-plt.ylabel("Amplitude")
+   plt.subplot(4,1,2)
+   plt.plot(t, carrier)
+   plt.title("Carrier Signal")
+   plt.xlabel("Time")
+   plt.ylabel("Amplitude")
 
-plt.subplot(4,1,3)
-plt.plot(t, am_signal, color='red')
-plt.title("AM Modulated Signal")
-plt.xlabel("Time")
-plt.ylabel("Amplitude")
+   plt.subplot(4,1,3)
+   plt.plot(t, am_signal, color='red')
+   plt.title("AM Modulated Signal")
+   plt.xlabel("Time")
+   plt.ylabel("Amplitude")
 
-plt.subplot(4,1,4)
-plt.plot(t, demodulated, color='green')
-plt.title("Demodulated Signal (Recovered Message)")
-plt.xlabel("Time")
-plt.ylabel("Amplitude")
+   plt.subplot(4,1,4)
+   plt.plot(t, demodulated, color='green')
+   plt.title("Demodulated Signal (Recovered Message)")
+   plt.xlabel("Time")
+   plt.ylabel("Amplitude")
 
-plt.tight_layout()
-plt.show()
+   plt.tight_layout()
+   plt.show()
 
 
  __Tabulation__:
